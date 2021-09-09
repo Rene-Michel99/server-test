@@ -39,18 +39,25 @@ class Database {
             var all = await this.model.message.findAll({});
             
             if(all.length == 0){
-                return ["empty"];
+                return "empty";
             }else{
                 for(var i = 0; i < all.length; i++){
                     await this.model.message.destroy({where:{id:all[i].id}});
                 }
-                return all;
+                var data = [];
+                for(var i = 0; i < all.length; i++){
+                    data.push({created:all[i].createdAt});
+                }
+                return data;
             }
         }else{
             for(var i = 0; i < response.length; i++){
                 await this.model.message.destroy({where:{id:response[i].id}});
             }
-            return response;
+            for(var i = 0; i < response.length; i++){
+                data.push({created:response[i].createdAt});
+            }
+            return data;
         }
     }
     async create_message(nome){
