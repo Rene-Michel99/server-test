@@ -46,7 +46,12 @@ class Database {
                 }
                 var data = [];
                 for(var i = 0; i < all.length; i++){
-                    data.push({created:all[i].createdAt});
+                    if(all[i].from != id){
+                        data.push({created:all[i].createdAt});
+                    }
+                }
+                if(data.length == 0){
+                    return "empty";
                 }
                 return data;
             }
