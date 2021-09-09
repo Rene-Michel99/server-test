@@ -39,7 +39,7 @@ class Database {
             var all = await this.model.message.findAll({});
             
             if(all.length == 0){
-                return "empty";
+                return ["empty"];
             }else{
                 for(var i = 0; i < all.length; i++){
                     await this.model.message.destroy({where:{id:all[i].id}});
