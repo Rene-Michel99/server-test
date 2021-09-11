@@ -36,28 +36,12 @@ class Database {
         
         var response = await this.model.message.findAll({where:{to:id}});
         if(response.length == 0){
-            var all = await this.model.message.findAll({});
-            if(all.length == 0){
-                return "empty";
-            }else{
-                for(var i = 0; i < all.length; i++){
-                    await this.model.message.destroy({where:{id:all[i].id}});
-                }
-                var data = [];
-                for(var i = 0; i < all.length; i++){
-                    if(all[i].from != id){
-                        data.push({created:all[i].createdAt});
-                    }
-                }
-                if(data.length == 0){
-                    return "empty";
-                }
-                return data;
-            }
+            return "empty";
+            
         }else{
-            for(var i = 0; i < response.length; i++){
-                await this.model.message.destroy({where:{id:response[i].id}});
-            }
+            //for(var i = 0; i < response.length; i++){
+                //await this.model.message.destroy({where:{id:response[i].id}});
+            //}
             for(var i = 0; i < response.length; i++){
                 data.push({created:response[i].createdAt});
             }
