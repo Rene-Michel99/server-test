@@ -37,7 +37,6 @@ class Database {
         var response = await this.model.message.findAll({where:{to:id}});
         if(response.length == 0){
             var all = await this.model.message.findAll({});
-            
             if(all.length == 0){
                 return "empty";
             }else{
